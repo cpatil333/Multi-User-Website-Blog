@@ -11,6 +11,7 @@ export const typeDefs = gql`
     name: String
     email: String
     password: String
+    imageUrl: String
     role: Role!
     posts: [Post!]!
     Comment: [Comment!]!
