@@ -1,0 +1,81 @@
+mutation ($input: UserInput!) {
+  createUser(input: $input) {
+    id
+    name
+    email
+    imageUrl
+    role
+  }
+}
+
+{
+  "input": {
+    "name": "Admin User",
+    "email": "admin@example.com",
+    "password": "Password123",
+    "imageUrl": "AdminUser.jpg",
+    "role":"ADMIN"
+  }
+}
+
+mutation($input: LoginInput!){
+  login(input: $input) {
+    token
+    user {
+      id
+      email
+      name
+      role
+    }
+  }
+}
+
+{
+  "input": {
+     "email": "admin@example.com",
+    "password": "Password123",
+  }
+}
+
+mutation($input: PostInput!){
+  createPost(input: $input) {
+    id
+    content
+    title
+  }
+}
+
+{
+  "input": {
+     "title": "React Router Tips and Tricks",
+    "content": "React Router provides a simple way to handle navigation in React apps...",
+    "authorId": "68b6ba1317744d834fad8400",
+  }
+}
+
+mutation($input: CommentInput!){
+  createComment(input: $input) {
+    id
+    text
+  }
+}
+
+{
+  "input": {
+     "text": "Thanks for the tips, React Router always confuses me.",
+    "authorId": "68b6b3362f063bd0e7abd2a5",
+    "postId": "68b6ba9317744d834fad8401",
+  }
+}
+
+Queries
+===========
+1.Get User List
+query{
+  users {
+    id
+    name
+    email
+    role
+  }
+}

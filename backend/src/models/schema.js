@@ -1,8 +1,5 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.typeDefs = void 0;
-const client_1 = require("@apollo/client");
-exports.typeDefs = (0, client_1.gql) `
+import { gql } from "apollo-server";
+export const typeDefs = gql `
   enum Role {
     USER
     ADMIN
@@ -13,6 +10,7 @@ exports.typeDefs = (0, client_1.gql) `
     name: String
     email: String
     password: String
+    imageUrl: String
     role: Role!
     posts: [Post!]!
     Comment: [Comment!]!
@@ -37,6 +35,8 @@ exports.typeDefs = (0, client_1.gql) `
     name: String!
     email: String!
     password: String!
+    imageUrl: String!
+    role: Role
   }
   input PostInput {
     title: String!
@@ -49,15 +49,29 @@ exports.typeDefs = (0, client_1.gql) `
     authorId: ID!
   }
 
+  type AuthPayload {
+    token: String!
+    user: User!
+  }
+  input LoginInput {
+    email: String!
+    password: String!
+  }
+
   type Query {
     users: [User!]
+    user(id: ID!): User!
     posts: [Post!]
     post(id: ID!): Post
+    comments: [Comment!]
+    comment(id: ID!): Comment!
   }
 
   type Mutation {
     createUser(input: UserInput!): User!
+    login(input: LoginInput!): AuthPayload!
     createPost(input: PostInput!): Post!
     createComment(input: CommentInput!): Comment!
   }
 `;
+//# sourceMappingURL=schema.js.map

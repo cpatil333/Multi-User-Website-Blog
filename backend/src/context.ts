@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
-import { JwtUser, getUserFromReq } from "../src/auth/auth";
+import type { JwtUser } from "./auth/auth.js";
+import { getUserFromReq } from "./auth/auth.js";
 
 const prisma = new PrismaClient();
 

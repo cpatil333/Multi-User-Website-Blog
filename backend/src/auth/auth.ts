@@ -6,7 +6,7 @@ dotenv.config();
 const SECRET = process.env.SECRET_KEY!;
 
 export type JwtUser = {
-  id: Number;
+  id: string;
   name: string;
   role: "USER" | "ADMIN";
 };
