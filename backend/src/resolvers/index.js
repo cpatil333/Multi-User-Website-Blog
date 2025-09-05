@@ -36,6 +36,20 @@ export const resolvers = {
             });
         },
     },
+    Post: {
+        author: async (parent, args, ctx) => {
+            return ctx.prisma.user.findMany({
+                where: { id: parent.authorId },
+            });
+        },
+    },
+    Comment: {
+        author: async (parent, args, ctx) => {
+            return ctx.prisma.user.findMany({
+                where: { id: parent.authorId },
+            });
+        },
+    },
     Mutation: {
         createUser: async (parent, { input }, ctx) => {
             const user = await ctx.prisma.user.findFirst({
@@ -47,8 +61,11 @@ export const resolvers = {
             const hassedPasword = await bcrypt.hash(input.password, 10);
             return await ctx.prisma.user.create({
                 data: {
-                    ...input,
+                    name: input.name,
+                    email: input.email,
                     password: hassedPasword,
+                    imageUrl: input.imageUrl,
+                    role: input.role,
                 },
             });
         },

@@ -40,8 +40,11 @@ mutation($input: LoginInput!){
 mutation($input: PostInput!){
   createPost(input: $input) {
     id
-    content
-    title
+      title
+      content
+      author {
+        name
+      }
   }
 }
 
@@ -77,5 +80,22 @@ query{
     name
     email
     role
+  }
+}
+
+2. Get the Post List
+query{
+  posts {
+    id
+    title
+    content
+  }
+}
+
+3.Get Comments List
+query{
+  comments {
+    id
+    text
   }
 }

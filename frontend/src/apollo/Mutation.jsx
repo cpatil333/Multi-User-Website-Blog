@@ -25,3 +25,28 @@ export const USER_REGISTER = gql`
     }
   }
 `;
+
+export const CREATE_POST = gql`
+  mutation ($input: PostInput!) {
+    createPost(input: $input) {
+      id
+      title
+      content
+      author {
+        name
+      }
+    }
+  }
+`;
+
+export const CREATE_COMMENT = gql`
+  mutation ($input: CommentInput!) {
+    createComment(input: $input) {
+      id
+      text
+      author {
+        name
+      }
+    }
+  }
+`;

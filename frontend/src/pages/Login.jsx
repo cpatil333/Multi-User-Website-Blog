@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { USER_LOGIN } from "../apollo/Mutation";
+import { useDispatch } from "react-redux";
+import { setCredential } from "../features/auth/authSlice";
 
 export const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({});
   const [login] = useMutation(USER_LOGIN);
 
@@ -15,10 +18,36 @@ export const Login = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-    } catch (error) {}
+      const { data } = await login({
+        variables: {
+          input: {
+            ...formData,
+          },
+        },
+      });
+      console.log(data);
+      if (data?.login) {
+        dispatch(
+          setCredential({
+            user: {
+              id: data.login.user.id,
+              name: data.login.user.name,
+              role: data.login.user.role,
+            },
+            token: data.login.token,
+          })
+        );
+        navigate("/", { replace: true });
+      } else {
+        console.log("Invalid login credential!");
+      }
+    } catch (error) {
+      console.error("Error Login ", error.message);
+      alert("Login failed, Please try again!");
+    }
   };
 
   return (

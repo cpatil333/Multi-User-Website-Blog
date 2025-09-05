@@ -1,16 +1,18 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 export const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const path = location.pathname.toLowerCase();
   const token = localStorage.getItem("token") || null;
+  const dispatch = useDispatch();
 
   if (!token && path !== "/login" && path !== "register") {
     navigate("/login");
   }
   const handleLogout = () => {
-    //dispatch(logout());
+    dispatch(logout());
     navigate("/login", { replace: true });
   };
 

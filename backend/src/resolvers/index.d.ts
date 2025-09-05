@@ -46,6 +46,26 @@ export declare const resolvers: {
             postId: string;
         } | null>;
     };
+    Post: {
+        author: (parent: any, args: any, ctx: Context) => Promise<{
+            id: string;
+            name: string;
+            email: string;
+            password: string;
+            imageUrl: string;
+            role: import("@prisma/client").$Enums.Role;
+        }[]>;
+    };
+    Comment: {
+        author: (parent: any, args: any, ctx: Context) => Promise<{
+            id: string;
+            name: string;
+            email: string;
+            password: string;
+            imageUrl: string;
+            role: import("@prisma/client").$Enums.Role;
+        }[]>;
+    };
     Mutation: {
         createUser: (parent: any, { input }: any, ctx: Context) => Promise<{
             id: string;

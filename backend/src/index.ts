@@ -8,7 +8,7 @@ import { typeDefs } from "./models/schema.js";
 import { expressMiddleware } from "@apollo/server/express4";
 import path from "path";
 import { fileURLToPath } from "url";
-import routerUploads from "./middlewares/upload.js"
+import routerUploads from "./middlewares/upload.js";
 
 dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
@@ -19,7 +19,8 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/uploads", routerUploads);
-app.use("/uploads",express.static(path.join(__dirname, "src/uploads")));
+//app.use("/uploads", express.static(path.join(__dirname, "src/uploads")));
+app.use("/uploads", express.static(path.join(process.cwd(), "src", "uploads")));
 
 const server = new ApolloServer({
   typeDefs,

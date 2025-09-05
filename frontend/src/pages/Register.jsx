@@ -13,7 +13,7 @@ export const Register = () => {
     role: "select",
   });
   const [selectedFile, setSelectedFile] = useState(null);
-  const [userLogin] = useMutation(USER_REGISTER);
+  const [createUser] = useMutation(USER_REGISTER);
 
   const handleSelectInput = (e) => {
     setSelectedFile(e.target.files[0]);
@@ -51,16 +51,21 @@ export const Register = () => {
             throw new Error("Server return non-JSON", text);
           }
           const result = await response.json();
-          uploadFileName = result.flleName;
+          uploadFileName = result.fileName;
         } catch (error) {
           console.log("uploaded failed ", error.message);
           return;
         }
       }
-      const { data } = await userLogin({
+      const { data } = await createUser({
         variables: {
-          input: formData,
-          imageUrl: uploadFileName,
+          input: {
+            name: formData.name,
+            email: formData.email,
+            password: formData.password,
+            imageUrl: uploadFileName,
+            role: formData.role,
+          },
         },
       });
       if (data.createUser) {
@@ -115,8 +120,7 @@ export const Register = () => {
           <select name="role" onChange={handleInput}>
             <option value="select">Select Role</option>
             <option value="ADMIN">Admin</option>
-            <option value="FACULTY">Faculty</option>
-            <option value="STUDENT">Student</option>
+            <option value="USER">User</option>
           </select>
         </div>
         <div>

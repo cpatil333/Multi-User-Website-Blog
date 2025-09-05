@@ -6,6 +6,8 @@ import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
 import { getUsers } from "./API/getUsers";
 import { ErrorPage } from "./components/ErrorPage";
+import { CreatePost, userPost } from "./pages/CreatePost";
+import { CommentForm, userComment } from "./pages/CommentForm";
 
 function App() {
   const router = createBrowserRouter([
@@ -26,6 +28,16 @@ function App() {
         {
           path: "/register",
           element: <Register />,
+        },
+        {
+          path: "/create-post",
+          element: <CreatePost />,
+          action: userPost,
+        },
+        {
+          path: "/comments",
+          element: <CommentForm />,
+          action: userComment,
         },
       ],
     },

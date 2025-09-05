@@ -16,7 +16,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use("/uploads", routerUploads);
-app.use("/uploads", express.static(path.join(__dirname, "src/uploads")));
+//app.use("/uploads", express.static(path.join(__dirname, "src/uploads")));
+app.use("/uploads", express.static(path.join(process.cwd(), "src", "uploads")));
 const server = new ApolloServer({
     typeDefs,
     resolvers,
