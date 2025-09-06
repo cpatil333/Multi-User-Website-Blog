@@ -55,6 +55,13 @@ export declare const resolvers: {
             imageUrl: string;
             role: import("@prisma/client").$Enums.Role;
         }[]>;
+        comments: (parent: any, args: any, ctx: Context) => Promise<{
+            id: string;
+            authorId: string;
+            createdAt: Date;
+            text: string;
+            postId: string;
+        }[]>;
     };
     Comment: {
         author: (parent: any, args: any, ctx: Context) => Promise<{

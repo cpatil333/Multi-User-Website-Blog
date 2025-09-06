@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { CREATE_COMMENT } from "../apollo/Mutation";
 import { useSelector } from "react-redux";
+import { GET_POST } from "../apollo/Query";
 
 export const userComment = async ({ request }) => {
   try {
@@ -13,7 +14,7 @@ export const userComment = async ({ request }) => {
   }
 };
 
-export const CommentForm = () => {
+export const CommentForm = ({ postId }) => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     text: "",
@@ -28,6 +29,7 @@ export const CommentForm = () => {
         text: "",
       });
     },
+    refetchQueries: [{ GET_POST, variables: { postId: postId } }],
   });
 
   const handleInput = (e) => {
@@ -44,7 +46,7 @@ export const CommentForm = () => {
         variables: {
           input: {
             text: formData.text,
-            postId: formData.postId,
+            postId: postId,
             authorId: authorId,
           },
         },
@@ -63,7 +65,7 @@ export const CommentForm = () => {
           <textarea
             type="text"
             name="text"
-            value={formData.cotextntent}
+            value={formData.text}
             placeholder="Text"
             onChange={handleInput}
             rows={5}

@@ -51,3 +51,4 @@ model Comment {
   postId    String   @db.ObjectId
   createdAt DateTime @default(now())
 }
+

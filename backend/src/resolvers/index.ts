@@ -51,16 +51,21 @@ export const resolvers = {
         where: { id: parent.authorId },
       });
     },
+    comments: async (parent: any, args: any, ctx: Context) => {
+      return ctx.prisma.comment.findMany({
+        where: { postId: parent.id },
+      });
+    },
   },
-  
-   Comment: {
+
+  Comment: {
     author: async (parent: any, args: any, ctx: Context) => {
       return ctx.prisma.user.findMany({
         where: { id: parent.authorId },
       });
     },
   },
-  
+
   Mutation: {
     createUser: async (parent: any, { input }: any, ctx: Context) => {
       const user = await ctx.prisma.user.findFirst({

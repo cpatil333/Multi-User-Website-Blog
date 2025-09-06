@@ -29,7 +29,7 @@ export const Navbar = () => {
               <Link to="/posts">Posts</Link>
             </li>
             <li>
-              <Link to="/comments">Comments</Link>
+              <Link to="/comments-posts">Comments</Link>
             </li>
             <li>
               <Link onClick={handleLogout}>Logout</Link>

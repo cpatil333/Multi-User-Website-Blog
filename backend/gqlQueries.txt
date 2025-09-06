@@ -99,3 +99,26 @@ query{
     text
   }
 }
+
+4.Get Post by id
+query($postId: ID!){
+  post(id: $postId) {
+    id
+    title
+    content
+    author {
+      name
+    }
+    comments {
+      id
+      text
+      author {
+        name
+      }
+    }
+  }
+}
+
+{
+  "postId": "68b6ba9317744d834fad8401"
+}

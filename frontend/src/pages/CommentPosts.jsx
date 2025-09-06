@@ -1,9 +1,10 @@
 import React from "react";
-import { useLoaderData } from "react-router-dom";
+import { useNavigate, useLoaderData } from "react-router-dom";
 
-export const Posts = () => {
+export const CommentPosts = () => {
+  const navigate = useNavigate();
   const postList = useLoaderData();
-  console.log(postList);
+  // console.log(postList);
   const displayPosts = postList.posts;
 
   return (
@@ -14,8 +15,7 @@ export const Posts = () => {
           <tr>
             <th>Title</th>
             <th>Description</th>
-            <th>Commented By</th>
-            <th>Comment</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -23,19 +23,10 @@ export const Posts = () => {
             <tr key={post.id}>
               <td>{post.title}</td>
               <td>{post.content}</td>
-              <td>{post.author[0].name}</td>
               <td>
-                {post.comments.length > 0 ? (
-                  <ul>
-                    {post.comments.map((c) => (
-                      <li key={c.id}>
-                        <strong>{c.author?.name}:</strong> {c.text}
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  <em>No comments</em>
-                )}
+                <button onClick={() => navigate(`/post-details/` + post.id)}>
+                  Comment
+                </button>
               </td>
             </tr>
           ))}

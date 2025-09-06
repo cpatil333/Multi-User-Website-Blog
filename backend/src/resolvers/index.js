@@ -42,6 +42,11 @@ export const resolvers = {
                 where: { id: parent.authorId },
             });
         },
+        comments: async (parent, args, ctx) => {
+            return ctx.prisma.comment.findMany({
+                where: { postId: parent.id },
+            });
+        },
     },
     Comment: {
         author: async (parent, args, ctx) => {
